@@ -1,29 +1,87 @@
 # lab1
+### Створення проекту
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
 
-This template should help get you started developing with Vue 3 in Vite.
+### Налаштування prettier 
+![img.png](img.png)
 
-## Recommended IDE Setup
+# Lab1 — ToDo Manager на Vue.js
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Опис
+Простий застосунок для керування списком завдань із такими можливостями:
+- Додавання завдання (мінімальна валідація);
+- Перемикання статусу (active ↔ done);
+- Видалення завдання;
+- Редагування завдання;
+- Фільтрація за полями (title, description, status, createdAt, priority);
+- Очистка фільтрів;
+- Лічильники (загальна кількість, активні, виконані);
+- Вибір дати через `@vuepic/vue-datepicker`;
+- Збереження у LocalStorage;
+- Пагінація для зручності;
+- Простий рожевий UI/UX.
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Кроки запуску
 
-## Project Setup
+1. Клонувати репозиторій або відкрити проєкт у VS Code.
+2. Встановити залежності:
+   ```bash
+   npm install
 
-```sh
-npm install
-```
+3. Запустити проєкт:
+   ```bash
+   npm run dev
+4. Відкрити у браузері http://localhost:5173
 
-### Compile and Hot-Reload for Development
+## Використані можливості Vue
 
-```sh
-npm run dev
-```
+### Реактивність
+- `ref` — використано для:
+   - введення полів форми (title, description, priority);
+   - фільтрів (наприклад, `filters.title`, `filters.createdAt`);
+- `reactive` — для зберігання списку завдань як єдиної структури.
 
-### Compile and Minify for Production
+### Computed
+- Підрахунок кількості:
+   - `totalTasks` (усі завдання),
+   - `activeTasks` (статус = active),
+   - `completedTasks` (статус = done)
+- Фільтрація завдань (відображаються тільки ті, що підходять під умови)
 
-```sh
-npm run build
-```
+### Watch
+- `watch(tasks, { deep: true })` — при будь-якій зміні списку він зберігається у LocalStorage
+
+### Директиви
+- `v-model` — прив’язка інпутів і селектів (title, description, priority, filters).
+- `v-on / @` — обробка подій (`@click`, `@submit`).
+- `v-bind / :` — прив’язка атрибутів (`:class`, `:placeholder`).
+- `v-for` — відображення списку завдань та пагінації.
+- `v-if / v-else` — умовне відображення повідомлень («Немає завдань»).
+- `v-show` — використано для показу/приховування елементів у фільтрах.
+
+---
+
+## DevTools
+- **LocalStorage**: у вкладці Application → LocalStorage зберігається весь список завдань у форматі JSON.
+- **Computed**: у Vue DevTools можна переглянути, як автоматично обчислюються `totalTasks`, `activeTasks`, `completedTasks`.
+- **Watch**: видно, як при зміні списку він автоматично оновлюється в LocalStorage.
+
+---
+
+## Скріншоти
+
+### Головний інтерфейс
+Створення нового завдання
+![img_3.png](img_3.png)
+### Фільтри
+Фільтр по виконанних завданнях
+![img_5.png](img_5.png)
+Фільтр по активних завданнях
+![img_6.png](img_6.png)
+
+
+### LocalStorage
+![img_7.png](img_7.png)
