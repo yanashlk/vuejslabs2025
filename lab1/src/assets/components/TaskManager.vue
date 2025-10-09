@@ -3,6 +3,7 @@
     <h1 class="text-2xl font-bold mb-4 text-center">📋 Список завдань</h1>
 
     <div class="grid gap-2 mb-6">
+      <!--v-model для двостороньої прив’язки даних інпутів-->
       <input v-model="newTask.title" placeholder="Назва" class="border p-2 rounded" />
       <textarea
         v-model="newTask.description"
@@ -16,7 +17,7 @@
         <option value="medium">Середній</option>
         <option value="high">Високий</option>
       </select>
-
+      <!--v-on Для обробки подій -->
       <button @click="addTask" class="bg-blue-500 text-white py-2 rounded">➕ Додати</button>
     </div>
 
@@ -61,12 +62,14 @@
     </div>
 
     <ul>
+      <!--v-for Для відображення списків-->
       <li
         v-for="task in filteredTasks"
         :key="task.id"
         class="flex justify-between items-start border-b py-3"
       >
         <div>
+          <!--v-bind Для прив’язки динамічних атрибутів-->
           <h3 :class="task.status === 'done' ? 'line-through text-gray-500' : ''" class="font-bold">
             {{ task.title }}
           </h3>
@@ -86,6 +89,7 @@
 </template>
 
 <script setup>
+// створення реактивних змінних, для обчислення кількості завдань, щоб автоматично відслідковувати зміни у списку та записувати нове значення в LocalStorage
 import { ref, computed, watch, onMounted } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
