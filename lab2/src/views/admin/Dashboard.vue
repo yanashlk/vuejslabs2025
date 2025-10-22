@@ -1,15 +1,22 @@
-<template>
-  <Reports>
-    <template #row="{ item }">
-      <tr class="hover:bg-blue-50 transition">
-        <td class="border px-3 py-2 text-blue-600 font-bold">#{{ item.id }}</td>
-        <td class="border px-3 py-2">{{ item.title.toUpperCase() }}</td>
-        <td class="border px-3 py-2">{{ new Date(item.date).toLocaleDateString() }}</td>
-      </tr>
-    </template>
-  </Reports>
-</template>
-
 <script setup>
-import Reports from './Reports.vue'
+import { ref } from 'vue'
+import UserCard from '../../components/UserCard.vue'
+
+const users = ref([
+  { id: 1, name: 'Ірина Коваль', email: 'iryna@gmail.com' },
+  { id: 2, name: 'Софія Крещенко', email: 'sophiakre@gmail.com' },
+])
+
+const deleteUser = (id) => {
+  users.value = users.value.filter((u) => u.id !== id)
+}
 </script>
+
+<template>
+  <div>
+    <h1 class="text-2xl font-bold mb-4">Dashboard</h1>
+    <div class="space-y-3">
+      <UserCard v-for="user in users" :key="user.id" :user="user" @remove="deleteUser" />
+    </div>
+  </div>
+</template>

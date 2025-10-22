@@ -3,18 +3,40 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <header class="bg-gray-800 text-white py-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center px-6">
+      <div class="flex items-center gap-3">
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
+        <h1 class="text-xl font-semibold">Vue Admin Demo</h1>
+      </div>
 
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+      <nav class="space-x-4">
+        <!-- Публічні сторінки -->
+        <RouterLink to="/" class="hover:underline" active-class="text-yellow-400">Home</RouterLink>
+        <RouterLink to="/login" class="hover:underline" active-class="text-yellow-400"
+          >Login</RouterLink
+        >
+        <RouterLink to="/register" class="hover:underline" active-class="text-yellow-400"
+          >Register</RouterLink
+        >
+
+        <!-- Адмін-розділ -->
+        <RouterLink to="/admin/dashboard" class="hover:underline" active-class="text-yellow-400"
+          >Dashboard</RouterLink
+        >
+        <RouterLink to="/admin/users" class="hover:underline" active-class="text-yellow-400"
+          >Users</RouterLink
+        >
+        <RouterLink to="/admin/reports" class="hover:underline" active-class="text-yellow-400"
+          >Reports</RouterLink
+        >
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <main class="container mx-auto p-6">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>

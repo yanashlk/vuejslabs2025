@@ -1,27 +1,25 @@
-<script setup>
-import { defineModel } from 'vue'
-
-// v-model
-const modelValue = defineModel()
-
-// props
-defineProps({
-  label: String,
-  type: { type: String, default: 'text' },
-  placeholder: String,
-})
-
-// emits автоматично працює з defineModel
-</script>
-
 <template>
   <div class="mb-4">
-    <label class="block mb-1 font-semibold">{{ label }}</label>
+    <label class="block mb-1 font-medium">{{ label }}</label>
     <input
+      v-model="model"
       :type="type"
-      :placeholder="placeholder"
-      v-model="modelValue"
       class="border rounded px-3 py-2 w-full"
+      :placeholder="placeholder"
     />
   </div>
 </template>
+
+<script setup>
+const props = defineProps({
+  label: String,
+  type: {
+    type: String,
+    default: 'text',
+  },
+  placeholder: String,
+})
+
+// новий синтаксис Vue 3.3+
+const model = defineModel()
+</script>
