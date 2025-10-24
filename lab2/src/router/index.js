@@ -43,7 +43,7 @@ const router = createRouter({
   },
 })
 
-// Навігаційний guard
+// Навігаційний guard - не знаходить токен, перенаправляє
 router.beforeEach((to, from, next) => {
   const auth = isAuthenticated()
 
