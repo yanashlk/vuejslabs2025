@@ -1,22 +1,47 @@
 <script setup>
-import { ref } from 'vue'
-import UserCard from '../../components/UserCard.vue'
+import { ref, computed } from 'vue'
+import OverviewTab from './DashboardTabs/Overview.vue'
+import ActivityTab from './DashboardTabs/Activity.vue'
+import UsersTab from './Users.vue'
 
-const users = ref([
-  { id: 1, name: 'Ірина Коваль', email: 'iryna@gmail.com' },
-  { id: 2, name: 'Софія Крещенко', email: 'sophiakre@gmail.com' },
-])
+const currentTab = ref('Users')
 
-const deleteUser = (id) => {
-  users.value = users.value.filter((u) => u.id !== id)
-}
+const currentComponent = computed(() => {
+  if (currentTab.value === 'Overview') return OverviewTab
+  if (currentTab.value === 'Activity') return ActivityTab
+  if (currentTab.value === 'Users') return UsersTab
+})
 </script>
 
 <template>
   <div>
     <h1 class="text-2xl font-bold mb-4">Dashboard</h1>
-    <div class="space-y-3">
-      <UserCard v-for="user in users" :key="user.id" :user="user" @remove="deleteUser" />
+
+    <!-- Перемикач вкладок -->
+    <div class="flex gap-4 mb-6">
+      <button
+        @click="currentTab = 'Overview'"
+        :class="currentTab === 'Overview' ? 'font-bold underline' : ''"
+      >
+        📊 Overview
+      </button>
+      <button
+        @click="currentTab = 'Activity'"
+        :class="currentTab === 'Activity' ? 'font-bold underline' : ''"
+      >
+        ⚡ Activity
+      </button>
+      <button
+        @click="currentTab = 'Users'"
+        :class="currentTab === 'Users' ? 'font-bold underline' : ''"
+      >
+        👥 Users
+      </button>
     </div>
+
+    <!-- Кешування через KeepAlive -->
+    <KeepAlive :include="['OverviewTab', 'ActivityTab', 'Users']">
+      <component :is="currentComponent" />
+    </KeepAlive>
   </div>
 </template>
