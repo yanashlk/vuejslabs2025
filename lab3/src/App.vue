@@ -1,11 +1,22 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <!--  <HeaderComponent />-->
+
+  <transition name="fade" mode="out-in">
+    <RouterView />
+  </transition>
+
+  <!--  <FooterComponent />-->
 </template>
 
-<style scoped></style>
+<script setup></script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
