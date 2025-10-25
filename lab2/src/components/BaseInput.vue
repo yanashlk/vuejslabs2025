@@ -20,6 +20,5 @@ const props = defineProps({
   placeholder: String,
 })
 
-// новий синтаксис Vue 3.3+
 const model = defineModel()
 </script>

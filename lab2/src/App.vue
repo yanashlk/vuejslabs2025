@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="container mx-auto flex justify-between items-center px-6">
       <div class="flex items-center gap-3">
         <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
-        <h1 class="text-xl font-semibold">Vue Admin Demo</h1>
+        <!--        <h1 class="text-xl font-semibold">Vue Admin Demo</h1>-->
       </div>
 
       <nav class="space-x-4">

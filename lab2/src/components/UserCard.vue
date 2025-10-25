@@ -2,12 +2,15 @@
 import UserActions from './UserActions.vue'
 
 const props = defineProps({
-  user: Object,
+  user: {
+    type: Object,
+    required: true,
+  },
 })
 const emit = defineEmits(['remove'])
 
-const handleDelete = (id) => {
-  emit('remove', id)
+const handleDelete = () => {
+  emit('remove', props.user.id)
 }
 </script>
 
@@ -18,6 +21,6 @@ const handleDelete = (id) => {
       <p class="text-gray-600 text-sm">{{ user.email }}</p>
     </div>
 
-    <UserActions :user-id="user.id" @delete="handleDelete" />
+    <UserActions @delete="handleDelete" />
   </div>
 </template>

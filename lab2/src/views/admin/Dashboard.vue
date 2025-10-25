@@ -39,7 +39,7 @@ const currentComponent = computed(() => {
       </button>
     </div>
 
-    <!-- Кешування через KeepAlive -->
+    <!-- Кешування -->
     <KeepAlive :include="['OverviewTab', 'ActivityTab', 'Users']">
       <component :is="currentComponent" />
     </KeepAlive>
