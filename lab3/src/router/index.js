@@ -1,5 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import HomeView from '../views/HomeView.vue'
+import ArticleView from '../views/ArticleView.vue'
+import AboutView from '../views/AboutView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
+
 const router = createRouter({
   history: createWebHistory(),
 
@@ -13,7 +18,7 @@ const router = createRouter({
       path: '/article/:id',
       name: 'article',
       component: ArticleView,
-      props: true, // параметр :id у компонент через props
+      props: true, // передає :id у компонент через props
     },
     {
       path: '/about',
