@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="logo">🚀 NASA News</div>
+    <div class="logo">NASA News</div>
     <nav>
       <RouterLink to="/" class="nav-link">Home</RouterLink>
       <RouterLink to="/about" class="nav-link">About</RouterLink>

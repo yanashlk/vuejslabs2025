@@ -1,6 +1,6 @@
 <template>
   <div class="ad-slot" @click="showModal = true">
-    <p>🌌 Advertisement — Click to view</p>
+    <p>Advertisement — Click to view</p>
   </div>
 
   <div v-if="showModal" class="modal-backdrop" @click="showModal = false">
