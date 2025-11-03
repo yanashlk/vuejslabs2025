@@ -19,13 +19,44 @@ import MainLayout from './layout/MainLayout.vue'
 .fade-leave-to {
   opacity: 0;
 }
+/* Світла тема  */
 :root {
   --bg: #ffffff;
-  --text: #222222;
+  --text: #000000;
+  --card-bg: #f5f5f5;
+  --border: #dcdcdc;
+  --link: #0462b7;
+  --link-hover: #023d72;
 }
 
+/* Темна тема */
 [data-theme='dark'] {
-  --bg: #1a1a1a;
+  --bg: #121212;
   --text: #f5f5f5;
+  --card-bg: #1e1e1e;
+  --border: #444;
+  --link: #4aa3ff;
+  --link-hover: #d2e6ff;
+}
+
+/* ⚙ Застосування до всіх елементів */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Дефолтні стилі для блоків, карток, кнопок */
+.card,
+header,
+footer,
+.article,
+.about {
+  background-color: var(--card-bg);
+  color: var(--text);
+  border-color: var(--border);
 }
 </style>

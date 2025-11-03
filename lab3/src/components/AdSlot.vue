@@ -36,7 +36,8 @@ const showModal = ref(false)
   align-items: center;
 }
 .modal {
-  background: white;
+  background: var(--bg);
+  color: var(--text);
   padding: 20px;
   border-radius: 10px;
 }

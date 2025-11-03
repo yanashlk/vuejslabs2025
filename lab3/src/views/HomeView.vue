@@ -1,5 +1,22 @@
 <template>
-  <h1>NASA News – Головна сторінка</h1>
+  <div>
+    <h1>🛰 Останні новини NASA</h1>
+
+    <!-- Рекламний блок -->
+    <AdSlot />
+
+    <!--  всі новини -->
+    <NewsCard v-for="item in newsList" :key="item.id" :article="item" />
+
+    <AdSlot />
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { news } from '../data/newsData'
+import { ref } from 'vue'
+import AdSlot from '../components/AdSlot.vue'
+import NewsCard from '../components/NewsCard.vue'
+
+const newsList = ref(news)
+</script>
