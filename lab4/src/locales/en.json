@@ -1,0 +1,42 @@
+{
+  "nav": {
+    "products": "Products",
+    "cart": "Cart",
+    "profile": "Profile"
+  },
+  "lang": { "ua": "Ukrainian", "en": "English" },
+
+  "products": {
+    "title": "Products Page",
+    "add": "Add to cart",
+    "price": "Price"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Cart is empty",
+    "qty": "Qty",
+    "subtotal": "Subtotal",
+    "clear": "Clear cart",
+    "remove": "Remove"
+  },
+  "profile": {
+    "title": "Profile",
+    "name": "Name",
+    "email": "Email",
+    "dateOfBirth": "Date of birth",
+    "address": "Address",
+    "phones": "Phones",
+    "addPhone": "Add phone",
+    "removePhone": "Remove",
+    "submit": "Save",
+    "success": "Profile saved!"
+  },
+
+  "validation": {
+    "required": "This field is required",
+    "email": "Invalid email",
+    "minChars": "At least {min} characters",
+    "date": "Invalid date",
+    "phone": "Invalid phone number"
+  }
+}
