@@ -6,7 +6,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 
 const { t } = useI18n()
 
-// схема валідації з локалізованими повідомленнями
+//схема валідації (локалізовані повідомлення)
 const schema = toTypedSchema(
   z.object({
     name: z
@@ -32,14 +32,15 @@ const schema = toTypedSchema(
           .regex(/^\+?[0-9\s\-()]{7,20}$/, { message: t('validation.phone') })
           .nonempty({ message: t('validation.required') }),
       )
-      .min(1),
+      .min(1, { message: t('validation.required') }),
   }),
 )
 
 const { handleSubmit, meta, resetForm } = useForm({
   validationSchema: schema,
-  validateOnBlur: true,
+  validateOnMount: true,
   validateOnChange: true,
+  validateOnBlur: true,
   initialValues: {
     name: '',
     email: '',
@@ -49,14 +50,13 @@ const { handleSubmit, meta, resetForm } = useForm({
   },
 })
 
-// поля
 const { value: name, errorMessage: nameErr } = useField('name')
 const { value: email, errorMessage: emailErr } = useField('email')
 const { value: dateOfBirth, errorMessage: dobErr } = useField('dateOfBirth')
 const { value: address, errorMessage: addressErr } = useField('address')
 const { fields: phoneFields, push, remove } = useFieldArray('phones')
 
-// подія submit
+// збереження
 const onSubmit = handleSubmit((values) => {
   localStorage.setItem('profile', JSON.stringify(values))
   alert(t('profile.success'))
@@ -106,7 +106,7 @@ function removePhoneAt(idx) {
           :key="f.key"
           style="display: flex; gap: 8px; align-items: center; margin: 6px 0"
         >
-          <Field name="phones[{{ idx }}]" v-slot="{ field, errorMessage }">
+          <Field :name="`phones[${idx}]`" v-slot="{ field, errorMessage }">
             <input v-bind="field" type="tel" placeholder="+380..." />
             <small v-if="errorMessage">{{ errorMessage }}</small>
           </Field>
@@ -120,8 +120,13 @@ function removePhoneAt(idx) {
       </div>
 
       <div style="margin-top: 12px">
-        <button :disabled="!meta.valid">{{ $t('profile.submit') }}</button>
-        <button type="button" @click="resetForm()">Reset</button>
+        <!--кнопка активна після заповнення всіх полів -->
+        <button type="submit" :disabled="!meta.valid || meta.pending">
+          {{ $t('profile.submit') }}
+        </button>
+        <button type="button" @click="resetForm()">
+          {{ $t('profile.reset') || 'Скинути зміни' }}
+        </button>
       </div>
     </form>
   </section>
