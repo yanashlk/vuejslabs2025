@@ -1,107 +1,119 @@
 <template>
-  <section class="hero">
-    <div class="hero__content">
-      <transition name="slide-fade" appear>
-        <div>
-          <h1>Твій простір — <span>ідеально чистий</span> з Cleanly Pro</h1>
-          <p class="hero__subtitle">
-            SaaS-платформа для замовлення клінінгових послуг онлайн.<br />
-            Замовляй, контролюй, аналізуй — усе в одному місці.
-          </p>
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Твій простір — <span>ідеально чистий</span> з Cleanly Pro</h1>
+        <p class="hero-subtitle">
+          SaaS-платформа для онлайн-замовлення клінінгу.<br />
+          Зручно, швидко, сучасно.
+        </p>
 
-          <div class="hero__actions">
-            <Button
-              label="Спробувати безкоштовно"
-              icon="pi pi-send"
-              severity="primary"
-              size="large"
-              @click="copyLink"
-            />
-            <Button
-              label="Дізнатись більше"
-              icon="pi pi-info-circle"
-              severity="secondary"
-              outlined
-              size="large"
-            />
-          </div>
-
-          <p v-if="copied" class="hero__copied">🔗 Посилання скопійовано в буфер обміну!</p>
+        <div class="hero-actions">
+          <Button
+            label="Спробувати безкоштовно"
+            icon="pi pi-send"
+            severity="primary"
+            size="large"
+          />
+          <Button
+            label="Дізнатись більше"
+            icon="pi pi-info-circle"
+            severity="secondary"
+            outlined
+            size="large"
+          />
         </div>
-      </transition>
-    </div>
+      </div>
 
-    <transition name="fade" appear>
-      <img
-        class="hero__image"
-        src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"
-        alt="Cleanly service illustration"
-      />
-    </transition>
+      <div class="hero-image-wrapper">
+        <img src="@/images/sofa.png" alt="Cleanly service illustration" class="hero-image" />
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup>
 import Button from 'primevue/button'
-import { ref } from 'vue'
-import { useClipboard } from '@/plugins/CopyToClipboardPlugin' // власний плагін
-
-const copied = ref(false)
-const { copyToClipboard } = useClipboard()
-
-const copyLink = async () => {
-  await copyToClipboard('https://cleanlypro.app')
-  copied.value = true
-  setTimeout(() => (copied.value = false), 2000)
-}
 </script>
 
 <style scoped>
-.hero {
-  @apply flex flex-col md:flex-row items-center justify-between px-8 py-20 bg-gray-50;
+.hero-section {
+  background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+  padding: 5rem 1rem;
 }
 
-.hero__content {
-  @apply max-w-xl text-center md:text-left space-y-6;
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.hero h1 {
-  @apply text-4xl md:text-5xl font-bold text-gray-800 leading-tight;
+.hero-content {
+  text-align: center;
+  max-width: 600px;
 }
 
-.hero h1 span {
-  @apply text-blue-600;
+.hero-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1f2937;
 }
 
-.hero__subtitle {
-  @apply text-gray-600 text-lg leading-relaxed;
+.hero-title span {
+  color: #2563eb;
 }
 
-.hero__actions {
-  @apply flex gap-4 justify-center md:justify-start mt-6;
+.hero-subtitle {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  color: #4b5563;
+  line-height: 1.6;
 }
 
-.hero__copied {
-  @apply text-green-600 font-medium mt-3;
+.hero-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.hero__image {
-  @apply w-64 md:w-96 mt-10 md:mt-0 transition-transform duration-700 hover:scale-105;
+.hero-image-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Анімації */
-.slide-fade-enter-active {
-  transition: all 0.8s ease;
-}
-.slide-fade-enter-from {
-  transform: translateY(30px);
-  opacity: 0;
+.hero-image {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  transition: transform 0.6s ease;
 }
 
-.fade-enter-active {
-  transition: opacity 1.2s ease;
+.hero-image:hover {
+  transform: scale(1.03);
 }
-.fade-enter-from {
-  opacity: 0;
+
+@media (min-width: 768px) {
+  .hero-container {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .hero-content {
+    text-align: left;
+    flex: 1;
+  }
+
+  .hero-image-wrapper {
+    flex: 1;
+  }
 }
 </style>
