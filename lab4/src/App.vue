@@ -9,7 +9,7 @@ const { locale } = useI18n()
 const settings = useSettingsStore()
 const { locale: loc } = storeToRefs(settings)
 
-// синхронізуємо i18n з персистентним стором
+// синхронізація i18n з персистентним стором
 onMounted(() => {
   locale.value = loc.value
 })

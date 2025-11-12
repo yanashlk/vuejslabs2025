@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 
+// створення окремого стора
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    lines: [], // [{ id, title, price, qty }]
+    lines: [],
   }),
   getters: {
     count: (s) => s.lines.reduce((acc, l) => acc + l.qty, 0),
@@ -25,7 +26,8 @@ export const useCartStore = defineStore('cart', {
       if (line) line.qty = Math.max(1, Number(qty) || 1)
     },
   },
+  //персистентність стану
   persist: {
-    key: 'cart', // зручно мати персист і для кошика
+    key: 'cart',
   },
 })

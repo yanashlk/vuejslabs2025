@@ -27,11 +27,13 @@ function toggleTheme() {
   applyTheme()
 }
 
+// перевірка на тему
 function applyTheme() {
   document.documentElement.setAttribute('data-theme', isDark.value ? 'dark' : 'light')
 }
 </script>
 
+<!--стилі діють тільки в цьому компоненті-->
 <style scoped>
 .header {
   display: flex;

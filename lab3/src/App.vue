@@ -39,7 +39,6 @@ import MainLayout from './layout/MainLayout.vue'
   --link-hover: #d2e6ff;
 }
 
-/* ⚙ Застосування до всіх елементів */
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -49,7 +48,6 @@ body {
     color 0.3s ease;
 }
 
-/* Дефолтні стилі для блоків, карток, кнопок */
 .card,
 header,
 footer,

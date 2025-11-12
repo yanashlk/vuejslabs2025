@@ -5,6 +5,7 @@ import { useSettingsStore } from '@/stores/settings'
 
 const { locale } = useI18n()
 const settings = useSettingsStore()
+// перетворення властивості стора у реактивні, щоб відслідковувати зміни
 const { locale: loc } = storeToRefs(settings)
 
 function switchTo(next) {

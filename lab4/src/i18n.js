@@ -2,7 +2,7 @@ import { createI18n } from 'vue-i18n'
 import ua from './locales/ua.json'
 import en from './locales/en.json'
 
-// прості "модифікатори" (для linked modifiers у рядках перекладів)
+// прості модифікатори у рядках перекладів)
 const modifiers = {
   upper: (str) => String(str).toUpperCase(),
   cap: (str) => String(str).charAt(0).toUpperCase() + String(str).slice(1),
@@ -27,7 +27,7 @@ const datetimeFormats = {
 }
 
 export const i18n = createI18n({
-  legacy: false, // Composition API
+  legacy: false,
   locale: 'ua',
   fallbackLocale: 'en',
   messages: { ua, en },
