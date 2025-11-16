@@ -62,44 +62,130 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .header {
-  @apply fixed top-0 left-0 w-full bg-white transition-all duration-300 shadow-sm;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+
+  transition: all 0.35s ease;
 }
 
 .header--scrolled {
-  background-color: v-bind('isScrolled ? "#f8f8f8" : "white"');
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .header__content {
-  @apply flex items-center justify-between px-8 py-4;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.header__logo {
-  @apply flex items-center gap-2 text-gray-800 font-semibold text-lg;
+.header__logo h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
 }
 
 .header__logo span {
-  @apply text-blue-600;
+  background: linear-gradient(120deg, #3b82f6, #60a5fa);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .header__nav {
-  @apply flex gap-6 text-gray-600 font-medium;
+  display: flex;
+  gap: 2.2rem;
 }
 
 .header__nav a {
-  @apply hover:text-blue-600 transition-colors;
+  font-weight: 500;
+  color: #475569;
+  position: relative;
+  transition: color 0.2s ease;
 }
 
-/* Модальне вікно (Teleport) */
+.header__nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  transition: width 0.3s ease;
+  border-radius: 10px;
+}
+
+.header__nav a:hover {
+  color: #2563eb;
+}
+
+.header__nav a:hover::after {
+  width: 100%;
+}
+
+.p-button {
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 1rem !important;
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.25);
+  transition: all 0.3s ease;
+}
+
+.p-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(59, 130, 246, 0.35);
+}
+
 .modal {
-  @apply fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal__content {
-  @apply bg-white p-8 rounded-2xl shadow-lg text-center space-y-4;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(25px);
+  padding: 2.2rem 2rem;
+  border-radius: 1.6rem;
+  width: 90%;
+  max-width: 420px;
+
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+  animation: popUp 0.4s ease both;
 }
 
-/* Анімація для модалки */
+@keyframes popUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.35s ease;
