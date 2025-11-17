@@ -3,17 +3,27 @@ import App from './App.vue'
 
 import PrimeVue from 'primevue/config'
 import Aura from '@primeuix/themes/aura'
-import 'primeicons/primeicons.css'
 
-import CopyToClipboardPlugin from './plugins/CopyToClipboardPlugin.js'
+import Card from 'primevue/card'
+import InputText from 'primevue/inputtext'
+import Textarea from 'primevue/textarea'
+import Checkbox from 'primevue/checkbox'
+import Button from 'primevue/button'
+import InputMask from 'primevue/inputmask'
 
 const app = createApp(App)
 
 app.use(PrimeVue, {
-  theme: { preset: Aura },
+  theme: {
+    preset: Aura,
+  },
 })
 
-// Реєстрація плагіну
-app.use(CopyToClipboardPlugin)
+app.component('Card', Card)
+app.component('InputText', InputText)
+app.component('Textarea', Textarea)
+app.component('Checkbox', Checkbox)
+app.component('Button', Button)
+app.component('InputMask', InputMask)
 
 app.mount('#app')
