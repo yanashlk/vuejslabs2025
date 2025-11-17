@@ -1,9 +1,11 @@
 <template>
+  <Toast />
   <HeaderSection />
   <HeroSection />
   <ProblemSolutionSection />
   <AdvantagesSection />
   <PricingSection />
+  <PromoCode />
   <TestimonialsSection />
   <FAQSection />
   <ContactForm />
@@ -22,4 +24,5 @@ import FAQSection from '@/components/FAQSection.vue'
 import ContactForm from '@/components/ContactForm.vue'
 import FooterSection from '@/components/FooterSection.vue'
 import BackToTop from '@/components/BackToTop.vue'
+import PromoCode from '@/components/PromoCode.vue'
 </script>

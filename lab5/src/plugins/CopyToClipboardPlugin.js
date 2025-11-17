@@ -2,39 +2,37 @@ import { ref } from 'vue'
 
 export default {
   install(app) {
-    // Глобальний метод
-    app.config.globalProperties.$copyToClipboard = async (text) => {
+    const copy = async (text) => {
       try {
         await navigator.clipboard.writeText(text)
-        console.log('📋 Скопійовано:', text)
+        return true
       } catch (err) {
-        console.error('Помилка копіювання:', err)
+        console.error('Copy error:', err)
+        return false
       }
     }
 
-    // Хук для Composition API
-    app.provide('copyToClipboard', async (text) => {
-      try {
-        await navigator.clipboard.writeText(text)
-      } catch (err) {
-        console.error(err)
-      }
-    })
+    // Глобальна функція
+    app.config.globalProperties.$copy = copy
+
+    // Для inject()
+    app.provide('copy', copy)
   },
 }
 
-// composable-функція для імпорту в компоненти
 export function useClipboard() {
   const copiedText = ref(null)
 
-  const copyToClipboard = async (text) => {
+  const copy = async (text) => {
     try {
       await navigator.clipboard.writeText(text)
       copiedText.value = text
+      return true
     } catch (err) {
-      console.error('Copy failed:', err)
+      console.error('Copy error:', err)
+      return false
     }
   }
 
-  return { copiedText, copyToClipboard }
+  return { copiedText, copy }
 }

@@ -12,6 +12,11 @@ import Textarea from 'primevue/textarea'
 import Checkbox from 'primevue/checkbox'
 import Button from 'primevue/button'
 import InputMask from 'primevue/inputmask'
+import ToastService from 'primevue/toastservice'
+import Toast from 'primevue/toast'
+
+// Твій плагін копіювання
+import CopyToClipboardPlugin from './plugins/CopyToClipboardPlugin.js'
 
 const app = createApp(App)
 
@@ -21,6 +26,10 @@ app.use(PrimeVue, {
   },
 })
 
+app.use(ToastService)
+app.use(CopyToClipboardPlugin)
+
+app.component('Toast', Toast)
 app.component('Card', Card)
 app.component('InputText', InputText)
 app.component('Textarea', Textarea)
@@ -28,4 +37,4 @@ app.component('Checkbox', Checkbox)
 app.component('Button', Button)
 app.component('InputMask', InputMask)
 
-createApp(App).use(PrimeVue).mount('#app')
+app.mount('#app')

@@ -12,10 +12,18 @@
           <a href="#contact">Контакти</a>
         </nav>
 
+        <!-- Social Icons -->
         <div class="socials">
           <a href="https://www.facebook.com/"><i class="pi pi-facebook"></i></a>
           <a href="https://www.instagram.com/"><i class="pi pi-instagram"></i></a>
           <a href="https://web.telegram.org/"><i class="pi pi-telegram"></i></a>
+        </div>
+
+        <!-- Copy email block -->
+        <div class="footer-contact" @click="copyEmail">
+          <i class="pi pi-envelope"></i>
+          support@cleanly.pro
+          <i class="pi pi-copy copy-icon"></i>
         </div>
       </div>
 
@@ -25,6 +33,25 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+import { inject } from 'vue'
+import { useToast } from 'primevue/usetoast'
+
+const copy = inject('copy')
+const toast = useToast()
+
+const copyEmail = async () => {
+  if (await copy('support@cleanly.pro')) {
+    toast.add({
+      severity: 'success',
+      summary: 'Email скопійовано!',
+      detail: 'Тепер можете вставити його у лист або форму 💙',
+      life: 2200,
+    })
+  }
+}
+</script>
 
 <style scoped>
 .footer {
@@ -44,7 +71,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.9rem;
 }
 
 .logo {
@@ -73,6 +100,7 @@
   color: #2563eb;
 }
 
+/* Social icons */
 .socials {
   display: flex;
   gap: 0.6rem;
@@ -95,6 +123,37 @@
 
 .socials a:hover {
   transform: scale(1.1);
+}
+
+.footer-contact {
+  margin-top: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+
+  color: #2563eb;
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  transition: 0.25s ease;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+}
+
+.footer-contact:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.05);
+}
+
+.copy-icon {
+  opacity: 0.8;
+  transition: 0.25s;
+}
+
+.footer-contact:hover .copy-icon {
+  opacity: 1;
+  transform: scale(1.15);
 }
 
 .footer-bottom {
