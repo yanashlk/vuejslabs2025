@@ -5,6 +5,7 @@
   <AdvantagesSection />
   <PricingSection />
   <TestimonialsSection />
+  <FAQSection />
 </template>
 
 <script setup>
@@ -14,4 +15,5 @@ import ProblemSolutionSection from './components/ProblemSolutionSection.vue'
 import AdvantagesSection from './components/AdvantagesSection.vue'
 import PricingSection from '@/components/PricingSection.vue'
 import TestimonialsSection from '@/components/TestimonialsSection.vue'
+import FAQSection from '@/components/FAQSection.vue'
 </script>

@@ -297,6 +297,7 @@ const prev = () => {
 
   cursor: pointer;
   transition: 0.25s ease;
+  z-index: 10;
 }
 
 .arrow:hover {
