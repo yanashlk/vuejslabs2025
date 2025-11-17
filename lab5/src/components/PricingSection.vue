@@ -3,70 +3,52 @@
     <div class="container">
       <h2 class="section-title">Оберіть <span>свій план</span></h2>
 
-      <!-- ─────── 3 Pricing Cards ─────── -->
+      <!-- PRICING GRID -->
       <div class="pricing-grid">
-        <!-- BASIC -->
-        <Card class="price-card">
+        <Card
+          v-for="plan in plans"
+          :key="plan.name"
+          :class="[
+            'price-card',
+            { active: selectedPlan === plan.name },
+            plan.name === 'Team' ? 'popular-card' : '',
+          ]"
+        >
           <template #title>
-            <h3 class="plan-title">Basic</h3>
+            <h3 class="plan-title">{{ plan.name }}</h3>
           </template>
-          <template #content>
-            <p class="plan-desc">Для особистого використання</p>
-            <p class="plan-price">199 грн/міс</p>
 
-            <ul class="plan-list">
-              <li><i class="pi pi-check"></i> 1 акаунт</li>
-              <li><i class="pi pi-check"></i> Базова аналітика</li>
-              <li><i class="pi pi-check"></i> Стандартна підтримка</li>
-              <li><i class="pi pi-check"></i> Історія замовлень</li>
+          <template #content>
+            <p class="plan-desc">{{ plan.desc }}</p>
+            <p class="plan-price" :class="{ 'plan-price-popular': plan.name === 'Team' }">
+              {{ plan.price }} грн/міс
+            </p>
+
+            <!-- FEATURES -->
+            <ul class="plan-list card-list">
+              <li v-for="feature in plan.features" :key="feature">
+                <i class="pi pi-check"></i> {{ feature }}
+              </li>
             </ul>
 
-            <Button label="Обрати план" severity="primary" class="choose-btn" />
-          </template>
-        </Card>
-
-        <!-- TEAM (highlighted) -->
-        <Card class="price-card popular-card">
-          <template #title>
-            <h3 class="plan-title">Team</h3>
-          </template>
-          <template #content>
-            <p class="plan-desc">Для невеликих команд</p>
-            <p class="plan-price plan-price-popular">399 грн/міс</p>
-
-            <ul class="plan-list">
-              <li><i class="pi pi-check"></i> До 5 акаунтів</li>
-              <li><i class="pi pi-check"></i> Розширена аналітика</li>
-              <li><i class="pi pi-check"></i> Чат-підтримка</li>
-              <li><i class="pi pi-check"></i> Індивідуальні ролі</li>
-            </ul>
-
-            <Button label="Популярний" severity="primary" class="choose-btn popular-btn" />
-          </template>
-        </Card>
-
-        <!-- PRO -->
-        <Card class="price-card">
-          <template #title>
-            <h3 class="plan-title">Pro</h3>
-          </template>
-          <template #content>
-            <p class="plan-desc">Для компаній та бізнесу</p>
-            <p class="plan-price">699 грн/міс</p>
-
-            <ul class="plan-list">
-              <li><i class="pi pi-check"></i> Необмежені акаунти</li>
-              <li><i class="pi pi-check"></i> Повна аналітика</li>
-              <li><i class="pi pi-check"></i> Пріоритетна підтримка</li>
-              <li><i class="pi pi-check"></i> API доступ</li>
-            </ul>
-
-            <Button label="Обрати план" severity="primary" class="choose-btn" />
+            <!-- BUTTON -->
+            <Button
+              :label="
+                selectedPlan === plan.name
+                  ? 'Обрано'
+                  : plan.name === 'Team'
+                    ? 'Популярний'
+                    : 'Обрати план'
+              "
+              :class="['choose-btn', { 'active-btn': selectedPlan === plan.name }]"
+              severity="primary"
+              @click="choosePlan(plan)"
+            />
           </template>
         </Card>
       </div>
 
-      <!-- ───────────────── Mini Calculator ──────────────── -->
+      <!-- MINI CALCULATOR -->
       <div class="calculator">
         <h3>Міні-калькулятор вартості</h3>
 
@@ -89,38 +71,63 @@ import Card from 'primevue/card'
 import Button from 'primevue/button'
 import InputNumber from 'primevue/inputnumber'
 
-const months = ref(1)
-const basePrice = 399
+const plans = [
+  {
+    name: 'Basic',
+    price: 199,
+    desc: 'Для особистого використання',
+    features: ['1 акаунт', 'Базова аналітика', 'Стандартна підтримка', 'Історія замовлень'],
+  },
+  {
+    name: 'Team',
+    price: 450,
+    desc: 'Для команд',
+    features: ['До 5 акаунтів', 'Розширена аналітика', 'Чат-підтримка', 'Індивідуальні ролі'],
+  },
+  {
+    name: 'Pro',
+    price: 870,
+    desc: 'Для бізнесу',
+    features: ['Необмежені акаунти', 'Повна аналітика', 'Пріоритетна підтримка', 'API доступ'],
+  },
+]
 
-const total = computed(() => months.value * basePrice)
+const selectedPlan = ref('Team')
+const months = ref(1)
+const basePrice = ref(450)
+
+const choosePlan = (plan) => {
+  selectedPlan.value = plan.name
+  basePrice.value = plan.price
+}
+
+/* Calculator */
+const total = computed(() => months.value * basePrice.value)
 </script>
 
 <style scoped>
 .pricing-section {
   padding: 6rem 1rem;
-  background: linear-gradient(180deg, #f7f9ff 0%, #ffffff 60%, #eef3ff 100%);
+  background: linear-gradient(180deg, #f7f9ff, #ffffff 60%, #eef3ff);
 }
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
-
 .section-title {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   color: #1e293b;
   margin-bottom: 3rem;
 }
-
 .section-title span {
   color: #2563eb;
 }
 
 .pricing-grid {
   display: grid;
-  gap: 2.5rem;
+  gap: 2.4rem;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
@@ -130,18 +137,22 @@ const total = computed(() => months.value * basePrice)
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 10px 25px rgba(0, 86, 255, 0.12);
+  box-shadow: 0 10px 22px rgba(0, 86, 255, 0.1);
   transition: all 0.45s ease;
 }
-
 .price-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 20px 40px rgba(29, 78, 216, 0.25);
+  transform: translateY(-8px) scale(1.03);
+}
+
+.active {
+  border: 2px solid #5a8bff !important;
+  transform: scale(1.06) !important;
+  box-shadow: 0 26px 55px rgba(80, 120, 255, 0.4) !important;
 }
 
 .popular-card {
   border: 2px solid #3b82f6;
-  box-shadow: 0 25px 45px rgba(29, 78, 216, 0.35);
+  box-shadow: 0 25px 45px rgba(29, 78, 216, 0.25);
   transform: scale(1.05);
 }
 
@@ -150,81 +161,64 @@ const total = computed(() => months.value * basePrice)
   font-weight: 700;
   color: #1e293b;
 }
-
 .plan-desc {
   color: #475569;
-  margin-bottom: 0.5rem;
 }
-
 .plan-price {
   font-size: 2rem;
   font-weight: 700;
-  margin-top: 0.6rem;
-  margin-bottom: 1.4rem;
-  color: #1e293b;
+  margin: 1rem 0 1.3rem;
 }
-
 .plan-price-popular {
   color: #2563eb;
 }
 
-.plan-list {
-  text-align: left;
-  margin: 1rem auto;
-  padding-left: 0;
-  list-style: none;
-  color: #374151;
+/* ——————————— FEATURE LIST  ——————————— */
+.card-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+  margin-bottom: 12px;
+  font-weight: 500;
 }
-
-.plan-list li {
-  margin-bottom: 0.4rem;
-}
-
-.plan-list i {
+.card-list i {
   color: #22c55e;
-  margin-right: 0.5rem;
+  font-size: 1.1rem;
 }
 
+/* ——————————— BUTTONS ——————————— */
 .choose-btn {
   margin-top: 1.4rem;
   width: 100%;
 }
 
-.popular-btn {
-  box-shadow: 0 10px 35px rgba(37, 99, 235, 0.4);
+.active-btn {
+  background: linear-gradient(120deg, #628df7, #8ab4ff) !important;
+  border-color: #628df7 !important;
+  box-shadow: 0 8px 30px rgba(110, 150, 255, 0.35);
 }
 
+/* ——————————— CALCULATOR ——————————— */
 .calculator {
   margin-top: 4rem;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.55);
   border-radius: 1.6rem;
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
   max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
 }
-
-.calculator h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1e293b;
-}
-
 .calc-input {
   margin: 1rem 0;
 }
-
 .input-field {
   width: 160px !important;
 }
-
-.calc-result {
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  color: #334155;
-}
-
 .calc-result span {
   font-weight: 800;
   color: #2563eb;
