@@ -1,5 +1,5 @@
 <template>
-  <section class="problem-solution py-24 bg-white" id="problem">
+  <section class="problem-solution py-24 bg-white" id="features">
     <div class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-12">
       <!-- Проблема -->
       <transition name="slide-left" appear>

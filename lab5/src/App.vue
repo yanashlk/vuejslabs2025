@@ -7,6 +7,8 @@
   <TestimonialsSection />
   <FAQSection />
   <ContactForm />
+  <FooterSection />
+  <BackToTop />
 </template>
 
 <script setup>
@@ -18,4 +20,6 @@ import PricingSection from '@/components/PricingSection.vue'
 import TestimonialsSection from '@/components/TestimonialsSection.vue'
 import FAQSection from '@/components/FAQSection.vue'
 import ContactForm from '@/components/ContactForm.vue'
+import FooterSection from '@/components/FooterSection.vue'
+import BackToTop from '@/components/BackToTop.vue'
 </script>

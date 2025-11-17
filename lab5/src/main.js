@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import PrimeVue from 'primevue/config'
+import 'primeicons/primeicons.css'
+
 import Aura from '@primeuix/themes/aura'
 
 import Card from 'primevue/card'
@@ -26,4 +28,4 @@ app.component('Checkbox', Checkbox)
 app.component('Button', Button)
 app.component('InputMask', InputMask)
 
-app.mount('#app')
+createApp(App).use(PrimeVue).mount('#app')
