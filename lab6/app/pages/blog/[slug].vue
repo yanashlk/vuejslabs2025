@@ -1,11 +1,20 @@
 <script setup>
 const route = useRoute();
 
+// fetch data
 const {
   data: post,
   pending,
   error,
-} = useFetch(() => `/api/posts/${route.params.slug}`);
+} = await useFetch(() => `/api/posts/${route.params.slug}`);
+
+// SEO
+useSeoMeta({
+  title: () => `${post.value?.title || "Стаття"} — Nuxt Course Blog`,
+  description: () => post.value?.content?.slice(0, 120) || "Опис статті",
+  ogTitle: () => post.value?.title,
+  ogDescription: () => post.value?.content?.slice(0, 120),
+});
 </script>
 
 <template>
