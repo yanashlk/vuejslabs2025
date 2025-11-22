@@ -66,7 +66,6 @@
       </div>
 
       <p v-if="success" class="success-message">✔ Повідомлення успішно надіслано!</p>
-      <p v-if="success" class="success-message">✔ Повідомлення успішно надіслано!</p>
     </div>
   </section>
 </template>
