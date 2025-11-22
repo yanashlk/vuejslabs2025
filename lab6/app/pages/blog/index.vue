@@ -1,15 +1,15 @@
 <script setup>
-const posts = [
-  { title: "Що таке Nuxt 4?", slug: "what-is-nuxt4" },
-  { title: "SSR vs SSG: простою мовою", slug: "ssr-vs-ssg" },
-  { title: "Що таке Nitro Server", slug: "nitro-basics" },
-];
+const { data: posts, pending, error } = useFetch("/api/posts");
 </script>
 
 <template>
   <div>
-    <h1>Блог</h1>
-    <ul>
+    <h1>Список статей</h1>
+
+    <div v-if="pending">Завантаження...</div>
+    <div v-if="error">Помилка при завантаженні статей 😢</div>
+
+    <ul v-if="posts">
       <li v-for="post in posts" :key="post.slug">
         <NuxtLink :to="`/blog/${post.slug}`">{{ post.title }}</NuxtLink>
       </li>

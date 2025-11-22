@@ -1,17 +1,23 @@
 <script setup>
 const route = useRoute();
 
-const slug = route.params.slug;
+const {
+  data: post,
+  pending,
+  error,
+} = useFetch(() => `/api/posts/${route.params.slug}`);
 </script>
 
 <template>
   <div>
-    <h1>Стаття: {{ slug }}</h1>
-    <p>
-      Тут буде контент статті з slug: <b>{{ slug }}</b
-      >.
-    </p>
+    <NuxtLink to="/blog">← Назад</NuxtLink>
 
-    <NuxtLink to="/blog">← Назад до блогу</NuxtLink>
+    <div v-if="pending">Завантаження статті...</div>
+    <div v-if="error">Статтю не знайдено 😢</div>
+
+    <div v-if="post">
+      <h1>{{ post.title }}</h1>
+      <p>{{ post.content }}</p>
+    </div>
   </div>
 </template>
