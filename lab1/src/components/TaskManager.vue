@@ -4,7 +4,7 @@
 
     <div class="grid gap-2 mb-6">
       <!--v-model для двостороньої прив’язки даних інпутів-->
-      <input v-model="newTask.title" placeholder="Назва" class="border p-2 rounded" />
+      <input name="title" v-model="newTask.title" placeholder="Назва" class="border p-2 rounded" />
       <textarea
         v-model="newTask.description"
         placeholder="Опис"
@@ -18,7 +18,9 @@
         <option value="high">Високий</option>
       </select>
       <!--v-on Для обробки подій -->
-      <button @click="addTask" class="bg-blue-500 text-white py-2 rounded">➕ Додати</button>
+      <button @click="addTask" class="bg-blue-500 text-white py-2 rounded add-task-btn">
+        ➕ Додати
+      </button>
     </div>
 
     <div class="border p-4 rounded mb-6">

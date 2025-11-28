@@ -10,7 +10,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "test:unit": "vitest",
+    "test:unit:ui": "vitest --ui"
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^11.0.2",
@@ -18,8 +20,12 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vitest/ui": "^4.0.14",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^27.2.0",
     "prettier": "3.6.2",
     "vite": "^7.0.6",
-    "vite-plugin-vue-devtools": "^8.0.0"
+    "vite-plugin-vue-devtools": "^8.0.0",
+    "vitest": "^4.0.14"
   }
 }

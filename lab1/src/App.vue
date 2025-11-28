@@ -1,5 +1,5 @@
 <script setup>
-import TaskManager from '@/assets/components/TaskManager.vue'
+import TaskManager from '@/components/TaskManager.vue'
 </script>
 
 <template>
