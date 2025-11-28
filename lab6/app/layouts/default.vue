@@ -9,7 +9,9 @@
     </header>
 
     <main class="content">
-      <NuxtPage />
+      <UContainer>
+        <NuxtPage />
+      </UContainer>
     </main>
 
     <footer class="footer">

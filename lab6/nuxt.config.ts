@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
-  modules: ["@nuxtjs/sitemap", "@nuxtjs/robots"],
+  modules: ["@nuxtjs/sitemap", "@nuxtjs/robots", "@nuxt/ui"],
 
   //http://localhost:3000/robots.txt?mockProductionEnv - щоб побачити саме мої правила
   robots: {
